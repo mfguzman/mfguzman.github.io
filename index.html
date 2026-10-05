@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Print Craft | Impresión 3D & Diseños a Medida</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        cyanNeon: '#00f2fe',
+                        blueNeon: '#4facfe',
+                        limeNeon: '#39ff14',
+                        darkBg: '#0b0f19',
+                        darkCard: 'rgba(17, 24, 39, 0.75)',
+                    },
+                    backgroundImage: {
+                        'hero-glow': 'radial-gradient(circle at 50% 20%, rgba(0, 242, 254, 0.15) 0%, rgba(11, 15, 25, 0) 70%)',
+                        'grid-pattern': "linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-grid {
+            background-size: 30px 30px;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-200 font-sans antialiased selection:bg-cyanNeon selection:text-black min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyanNeon to-blueNeon flex items-center justify-center text-black font-extrabold shadow-lg shadow-cyanNeon/20 group-hover:scale-105 transition-transform">
+                        <i data-lucide="box" class="w-6 h-6 stroke-[2.5]"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-wider text-white">3D<span class="text-gradient">PRINT</span>LAB</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                    <a href="#inicio" class="hover:text-cyanNeon transition-colors">Inicio</a>
+                    <a href="#catalogo" class="hover:text-cyanNeon transition-colors">Catálogo</a>
+                    <a href="#personalizados" class="hover:text-cyanNeon transition-colors">A Medida</a>
+                    <a href="#proceso" class="hover:text-cyanNeon transition-colors">Proceso</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a id="navWspBtn" href="#" target="_blank" class="flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-semibold px-5 py-2.5 rounded-full shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transition-all hover:-translate-y-0.5">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        <span>Cotizar WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden glass-card border-t border-gray-800 px-4 pt-4 pb-6 space-y-3">
+            <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-cyanNeon">Inicio</a>
+            <a href="#catalogo" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-cyanNeon">Catálogo</a>
+            <a href="#personalizados" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-cyanNeon">A Medida</a>
+            <a href="#proceso" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800 hover:text-cyanNeon">Proceso</a>
+            <a id="mobileWspBtn" href="#" target="_blank" class="flex items-center justify-center gap-2 w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 rounded-xl shadow-lg mt-4">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                <span>Cotizar WhatsApp</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-hero-glow bg-grid">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-cyanNeon/30 text-cyanNeon text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-cyanNeon animate-pulse"></span>
+                Impresión 3D de Alta Precisión & Diseños Personalizados
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6 max-w-4xl mx-auto">
+                Transformamos tus ideas en <span class="text-gradient">objetos reales y funcionales</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-base sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 font-normal">
+                Soluciones únicas para el hogar, accesorios de moto, artículos de bar, regalos personalizados y utilidades de alta durabilidad en PLA, PETG y TPU.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="#catalogo" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-cyanNeon to-blueNeon hover:from-cyan-400 hover:to-blue-500 text-black font-bold px-8 py-4 rounded-xl shadow-lg shadow-cyanNeon/25 hover:shadow-cyanNeon/40 transition-all hover:-translate-y-0.5">
+                    <i data-lucide="grid" class="w-5 h-5"></i>
+                    <span>Ver Catálogo de Productos</span>
+                </a>
+                <a id="heroWspBtn" href="#" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-2 glass-card hover:bg-gray-800/80 text-white font-semibold px-8 py-4 rounded-xl border-gray-700 hover:border-cyanNeon/50 transition-all">
+                    <i data-lucide="message-circle" class="w-5 h-5 text-emerald-400"></i>
+                    <span>Cotizar Proyecto Especial</span>
+                </a>
+            </div>
+
+            <!-- Features Badges -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center text-center">
+                    <i data-lucide="layers" class="w-6 h-6 text-cyanNeon mb-2"></i>
+                    <span class="text-xs sm:text-sm font-semibold text-white">PLA, PETG y TPU</span>
+                    <span class="text-xs text-gray-400">Materiales resistentes</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center text-center">
+                    <i data-lucide="truck" class="w-6 h-6 text-cyanNeon mb-2"></i>
+                    <span class="text-xs sm:text-sm font-semibold text-white">Envíos Rápidos</span>
+                    <span class="text-xs text-gray-400">A todo el país</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center text-center">
+                    <i data-lucide="pen-tool" class="w-6 h-6 text-cyanNeon mb-2"></i>
+                    <span class="text-xs sm:text-sm font-semibold text-white">Modelado CAD/3D</span>
+                    <span class="text-xs text-gray-400">Diseños 100% personalizados</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center text-center">
+                    <i data-lucide="check-circle" class="w-6 h-6 text-cyanNeon mb-2"></i>
+                    <span class="text-xs sm:text-sm font-semibold text-white">Calidad Garantizada</span>
+                    <span class="text-xs text-gray-400">Acabados limpios</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalogo" class="py-20 relative bg-darkBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Catálogo de Productos Destacados</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Explora algunos de nuestros productos listos para imprimir y personalizar con tu color o logo preferido.</p>
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-2 mt-8">
+                    <button class="filter-btn active px-5 py-2 rounded-full text-sm font-medium transition-all glass-card border-cyanNeon text-cyanNeon" data-category="todos">Todos</button>
+                    <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all glass-card border-gray-800 text-gray-400 hover:text-white" data-category="accesorios">Motos & Soportes</button>
+                    <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all glass-card border-gray-800 text-gray-400 hover:text-white" data-category="hogar">Hogar & Barista</button>
+                    <button class="filter-btn px-5 py-2 rounded-full text-sm font-medium transition-all glass-card border-gray-800 text-gray-400 hover:text-white" data-category="llaveros">Destapadores & Llaveros</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Item 1: Casco de Moto -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-cyanNeon/50 transition-all duration-300 flex flex-col" data-category="accesorios">
+                    <div class="relative overflow-hidden aspect-video bg-gray-900 cursor-pointer" onclick="openModal('76ee3828b2d9ebaa.webp', 'Soporte para Casco de Moto')">
+                        <img src="76ee3828b2d9ebaa.webp" alt="Soporte para Casco de Moto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/111827/00f2fe?text=Soporte+Casco+Moto'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-xs bg-black/70 text-cyanNeon px-3 py-1.5 rounded-full flex items-center gap-1 border border-cyanNeon/30">
+                                <i data-lucide="zoom-in" class="w-4 h-4"></i> Ampliar Imagen
+                            </span>
+                        </div>
+                        <span class="absolute top-3 left-3 bg-cyanNeon/20 text-cyanNeon border border-cyanNeon/40 text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-md">
+                            Motos & Soportes
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyanNeon transition-colors">Soporte para Casco de Moto</h3>
+                            <p class="text-gray-400 text-sm mb-4">Soporte de pared ultra resistente con perchero inferior integrado para colgar llaves o chaqueta. Opción de personalizar con tu logo o texto.</p>
+                        </div>
+                        <a href="#" onclick="orderProduct('Soporte para Casco de Moto')" class="w-full flex items-center justify-center gap-2 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 font-semibold py-2.5 rounded-xl transition-all">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>Pedir por WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 2: Soporte Hexagonal para Medallas -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-cyanNeon/50 transition-all duration-300 flex flex-col" data-category="hogar">
+                    <div class="relative overflow-hidden aspect-video bg-gray-900 cursor-pointer" onclick="openModal('2025-11-26_768949833ba17.webp', 'Soporte Hexagonal para Medallas')">
+                        <img src="2025-11-26_768949833ba17.webp" alt="Soporte Hexagonal para Medallas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/111827/00f2fe?text=Soporte+Medallas'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-xs bg-black/70 text-cyanNeon px-3 py-1.5 rounded-full flex items-center gap-1 border border-cyanNeon/30">
+                                <i data-lucide="zoom-in" class="w-4 h-4"></i> Ampliar Imagen
+                            </span>
+                        </div>
+                        <span class="absolute top-3 left-3 bg-purple-500/20 text-purple-300 border border-purple-500/40 text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-md">
+                            Hogar & Pared
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyanNeon transition-colors">Exhibidor Hexagonal de Medallas</h3>
+                            <p class="text-gray-400 text-sm mb-4">Exhibidor modular con diseño en panal. Permite encajar múltiples módulos para organizar y lucir tus medallas deportivas en la pared.</p>
+                        </div>
+                        <a href="#" onclick="orderProduct('Exhibidor Hexagonal para Medallas')" class="w-full flex items-center justify-center gap-2 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 font-semibold py-2.5 rounded-xl transition-all">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>Pedir por WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 3: Abre Lata Cerveza / Bebidas (Mariposa/Cerveza) -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-cyanNeon/50 transition-all duration-300 flex flex-col" data-category="llaveros">
+                    <div class="relative overflow-hidden aspect-video bg-gray-900 cursor-pointer" onclick="openModal('abre lata.jpg', 'Abre Lata de Bebida')">
+                        <img src="abre lata.jpg" alt="Abre Lata de Cerveza / Bebidas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='abre lata cerveza.jpg'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-xs bg-black/70 text-cyanNeon px-3 py-1.5 rounded-full flex items-center gap-1 border border-cyanNeon/30">
+                                <i data-lucide="zoom-in" class="w-4 h-4"></i> Ampliar Imagen
+                            </span>
+                        </div>
+                        <span class="absolute top-3 left-3 bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-md">
+                            Destapadores & Utiles
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyanNeon transition-colors">Abre Latas Ergonómico</h3>
+                            <p class="text-gray-400 text-sm mb-4">Herramienta práctica y protectora para abrir latas de refresco o cerveza sin lastimar tus uñas. Disponible en diseños de mariposa y choque de cerveza.</p>
+                        </div>
+                        <a href="#" onclick="orderProduct('Abre Lata Ergonómico')" class="w-full flex items-center justify-center gap-2 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 font-semibold py-2.5 rounded-xl transition-all">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>Pedir por WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 4: Basurero Knock Box Barista -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-cyanNeon/50 transition-all duration-300 flex flex-col" data-category="hogar">
+                    <div class="relative overflow-hidden aspect-video bg-gray-900 cursor-pointer" onclick="openModal('basurero barista.jpg', 'Caja de Residuos Knock Box Barista')">
+                        <img src="basurero barista.jpg" alt="Basurero Knock Box Barista" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/111827/00f2fe?text=Knock+Box+Barista'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-xs bg-black/70 text-cyanNeon px-3 py-1.5 rounded-full flex items-center gap-1 border border-cyanNeon/30">
+                                <i data-lucide="zoom-in" class="w-4 h-4"></i> Ampliar Imagen
+                            </span>
+                        </div>
+                        <span class="absolute top-3 left-3 bg-amber-700/30 text-amber-200 border border-amber-600/40 text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-md">
+                            Barista & Café
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyanNeon transition-colors">Knock Box para Barista</h3>
+                            <p class="text-gray-400 text-sm mb-4">Caja para vaciar los posos de café del portafiltro espresso. Fabricado en PETG de alta resistencia a impactos con barra amortiguadora.</p>
+                        </div>
+                        <a href="#" onclick="orderProduct('Knock Box para Barista')" class="w-full flex items-center justify-center gap-2 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 font-semibold py-2.5 rounded-xl transition-all">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>Pedir por WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 5: Abridor Múltiple de Palanca 6 Botellas -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-cyanNeon/50 transition-all duration-300 flex flex-col" data-category="llaveros">
+                    <div class="relative overflow-hidden aspect-video bg-gray-900 cursor-pointer" onclick="openModal('destapador 6.PNG', 'Estación Destapadora Múltiple 6 Botellas')">
+                        <img src="destapador 6.PNG" alt="Abridor de Botellas Múltiple" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/111827/00f2fe?text=Destapador+Multiple'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-xs bg-black/70 text-cyanNeon px-3 py-1.5 rounded-full flex items-center gap-1 border border-cyanNeon/30">
+                                <i data-lucide="zoom-in" class="w-4 h-4"></i> Ampliar Imagen
+                            </span>
+                        </div>
+                        <span class="absolute top-3 left-3 bg-blue-500/20 text-blue-300 border border-blue-500/40 text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-md">
+                            Bar & Eventos
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyanNeon transition-colors">Abridor Múltiple de Palanca (6 Botellas)</h3>
+                            <p class="text-gray-400 text-sm mb-4">Increíble mecanismo de palanca para destapar hasta 6 botellas simultáneamente en un solo movimiento. Ideal para reuniones y bar.</p>
+                        </div>
+                        <a href="#" onclick="orderProduct('Abridor Multiple de Palanca')" class="w-full flex items-center justify-center gap-2 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 font-semibold py-2.5 rounded-xl transition-all">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>Pedir por WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 6: Destapador Ergonómico de Palanca Individual -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-cyanNeon/50 transition-all duration-300 flex flex-col" data-category="llaveros">
+                    <div class="relative overflow-hidden aspect-video bg-gray-900 cursor-pointer" onclick="openModal('destapador.jpg', 'Destapador Ergonómico con Gatillo')">
+                        <img src="destapador.jpg" alt="Destapador Ergonómico de Palanca" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/111827/00f2fe?text=Destapador+Gatillo'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-xs bg-black/70 text-cyanNeon px-3 py-1.5 rounded-full flex items-center gap-1 border border-cyanNeon/30">
+                                <i data-lucide="zoom-in" class="w-4 h-4"></i> Ampliar Imagen
+                            </span>
+                        </div>
+                        <span class="absolute top-3 left-3 bg-cyanNeon/20 text-cyanNeon border border-cyanNeon/40 text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-md">
+                            Accesorios Bar
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyanNeon transition-colors">Destapador Asistido tipo Gatillo</h3>
+                            <p class="text-gray-400 text-sm mb-4">Abridor asistido para botellas de vidrio con palanca lateral. Retira la chapa sin esfuerzo con un agarre súper ergonómico.</p>
+                        </div>
+                        <a href="#" onclick="orderProduct('Destapador Asistido tipo Gatillo')" class="w-full flex items-center justify-center gap-2 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 font-semibold py-2.5 rounded-xl transition-all">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>Pedir por WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 7: Llavero Destapador Tapa Cerveza -->
+                <div class="product-card glass-card rounded-2xl overflow-hidden group hover:border-cyanNeon/50 transition-all duration-300 flex flex-col" data-category="llaveros">
+                    <div class="relative overflow-hidden aspect-video bg-gray-900 cursor-pointer" onclick="openModal('llavero.jpg', 'Llavero Destapador Tapa Cerveza')">
+                        <img src="llavero.jpg" alt="Llavero Destapador Tapa de Cerveza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='Captura.jpg'">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="text-xs bg-black/70 text-cyanNeon px-3 py-1.5 rounded-full flex items-center gap-1 border border-cyanNeon/30">
+                                <i data-lucide="zoom-in" class="w-4 h-4"></i> Ampliar Imagen
+                            </span>
+                        </div>
+                        <span class="absolute top-3 left-3 bg-rose-500/20 text-rose-300 border border-rose-500/40 text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-md">
+                            Llaveros Icónicos
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyanNeon transition-colors">Llavero Destapador "Chapa Cerveza"</h3>
+                            <p class="text-gray-400 text-sm mb-4">Llavero compacto en forma de chapa con abridor metálico reforzado en la parte posterior. Perfecto para llevar siempre con tus llaves.</p>
+                        </div>
+                        <a href="#" onclick="orderProduct('Llavero Destapador Chapa')" class="w-full flex items-center justify-center gap-2 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 font-semibold py-2.5 rounded-xl transition-all">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>Pedir por WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Printing Section -->
+    <section id="personalizados" class="py-20 bg-gradient-to-b from-darkBg via-gray-900 to-darkBg relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border-cyanNeon/20 bg-hero-glow">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-cyanNeon font-semibold text-sm tracking-wider uppercase">¿Tienes un modelo o idea propia?</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-6">Impresión a Medida & Archivos STL Custom</h2>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Si tienes un archivo 3D listo (`.STL`, `.OBJ`, `.3MF`) descargado de plataformas como Thingiverse, Printables o MakerWorld, o simplemente tienes una idea en mente, nosotros nos encargamos del restado, preparación y fabricación.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3 text-gray-200">
+                                <i data-lucide="check" class="w-5 h-5 text-cyanNeon"></i>
+                                <span>Asesoramiento en selección de materiales según uso (flexibilidad, resistencia térmica, impacto).</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-200">
+                                <i data-lucide="check" class="w-5 h-5 text-cyanNeon"></i>
+                                <span>Variedad de colores y acabados mate, satinados o translúcidos.</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-200">
+                                <i data-lucide="check" class="w-5 h-5 text-cyanNeon"></i>
+                                <span>Cotización inmediata sin compromiso enviando tu archivo.</span>
+                            </li>
+                        </ul>
+                        <a id="customWspBtn" href="#" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-cyanNeon to-blueNeon text-black font-bold px-8 py-4 rounded-xl shadow-lg shadow-cyanNeon/20 hover:scale-105 transition-transform">
+                            <i data-lucide="file-up" class="w-5 h-5"></i>
+                            <span>Enviar Archivo o Idea por WhatsApp</span>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-card p-6 rounded-2xl border-gray-800 text-center">
+                            <div class="w-12 h-12 rounded-full bg-cyanNeon/10 text-cyanNeon flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="cpu" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-1">Impresión Ultra Rápida</h4>
+                            <p class="text-xs text-gray-400">Equipos modernos de alta velocidad con acabados limpios.</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl border-gray-800 text-center">
+                            <div class="w-12 h-12 rounded-full bg-cyanNeon/10 text-cyanNeon flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-1">Piezas Resistentes</h4>
+                            <p class="text-xs text-gray-400">Rellenos estructurales adaptados a piezas mecánicas.</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl border-gray-800 text-center col-span-2">
+                            <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="palette" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="font-bold text-white mb-1">Suscripción & Pedidos por Lote</h4>
+                            <p class="text-xs text-gray-400">Descuentos especiales para recuerdos de eventos, merchandising o repuestos de negocios.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section id="proceso" class="py-20 bg-darkBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">¿Cómo Pedir tu Impresión?</h2>
+                <p class="text-gray-400">Paso a paso para concretar tu pedido en minutos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="glass-card p-8 rounded-2xl relative">
+                    <span class="text-5xl font-extrabold text-cyanNeon/20 absolute top-4 right-6">01</span>
+                    <div class="w-12 h-12 rounded-xl bg-cyanNeon/10 text-cyanNeon flex items-center justify-center mb-6">
+                        <i data-lucide="send" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">1. Envías tu Idea o Foto</h3>
+                    <p class="text-gray-400 text-sm">Elige un producto de nuestro catálogo o envíanos una foto / enlace del modelo que buscas imprimir.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card p-8 rounded-2xl relative">
+                    <span class="text-5xl font-extrabold text-cyanNeon/20 absolute top-4 right-6">02</span>
+                    <div class="w-12 h-12 rounded-xl bg-cyanNeon/10 text-cyanNeon flex items-center justify-center mb-6">
+                        <i data-lucide="calculator" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">2. Cotizamos al Instante</h3>
+                    <p class="text-gray-400 text-sm">Calculamos el tiempo, material y costo. Te ofrecemos opciones de colores e impresiones previas.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card p-8 rounded-2xl relative">
+                    <span class="text-5xl font-extrabold text-cyanNeon/20 absolute top-4 right-6">03</span>
+                    <div class="w-12 h-12 rounded-xl bg-cyanNeon/10 text-cyanNeon flex items-center justify-center mb-6">
+                        <i data-lucide="package-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">3. Fabricación & Entrega</h3>
+                    <p class="text-gray-400 text-sm">Iniciamos la impresión, pasamos por control de calidad y te notificamos para la entrega o envío.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-nav border-t border-gray-800 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-gray-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyanNeon to-blueNeon flex items-center justify-center text-black font-bold">
+                        <i data-lucide="box" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-lg font-bold text-white">3D<span class="text-gradient">PRINT</span>LAB</span>
+                </div>
+                <div class="flex items-center gap-6 text-sm text-gray-400">
+                    <a href="#inicio" class="hover:text-cyanNeon">Inicio</a>
+                    <a href="#catalogo" class="hover:text-cyanNeon">Catálogo</a>
+                    <a href="#personalizados" class="hover:text-cyanNeon">Servicios</a>
+                </div>
+            </div>
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4 text-center sm:text-left">
+                <p>&copy; <span id="year"></span> 3D Print Lab. Todos los derechos reservados. Diseñado para GitHub Pages.</p>
+                <div class="flex items-center gap-4">
+                    <span>Materiales PLA+ / PETG / TPU</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full glass-card rounded-2xl overflow-hidden p-2">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/70 text-white flex items-center justify-center hover:bg-cyanNeon hover:text-black transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="max-h-[80vh] overflow-hidden rounded-xl flex items-center justify-center bg-gray-950">
+                <img id="modalImg" src="" alt="Vista previa" class="max-h-[80vh] w-auto object-contain">
+            </div>
+            <div class="p-4 text-center">
+                <h3 id="modalTitle" class="text-lg font-bold text-white"></h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURACIÓN DE WHATSAPP (Coloca aquí tu número telefónico con código de país sin el signo +)
+        const WHATSAPP_NUMBER = "584120000000"; // Ej: 584121234567 para Venezuela, 54911... para Argentina, etc.
+
+        function getWspUrl(text) {
+            return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+        }
+
+        // Configurar botones generales de WhatsApp
+        document.addEventListener('DOMContentLoaded', () => {
+            const defaultMsg = "¡Hola! Quisiera obtener información y cotizar una impresión 3D.";
+            
+            document.getElementById('navWspBtn').href = getWspUrl(defaultMsg);
+            document.getElementById('mobileWspBtn').href = getWspUrl(defaultMsg);
+            document.getElementById('heroWspBtn').href = getWspUrl(defaultMsg);
+            document.getElementById('customWspBtn').href = getWspUrl("¡Hola! Tengo un archivo/idea para una impresión 3D a medida y me gustaría cotizarlo.");
+
+            // Año en footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Lucide Icons init
+            lucide.createIcons();
+        });
+
+        // Función para pedir producto específico
+        function orderProduct(productName) {
+            const msg = `¡Hola! Me interesa cotizar e imprimir el producto: *${productName}*. ¿Tienen colores disponibles?`;
+            window.open(getWspUrl(msg), '_blank');
+        }
+
+        // Filtro de Catálogo
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'border-cyanNeon', 'text-cyanNeon');
+                    b.classList.add('border-gray-800', 'text-gray-400');
+                });
+                btn.classList.add('active', 'border-cyanNeon', 'text-cyanNeon');
+                btn.classList.remove('border-gray-800', 'text-gray-400');
+
+                const category = btn.getAttribute('data-category');
+
+                productCards.forEach(card => {
+                    if (category === 'todos' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Modal de Vista Previa de Imágenes
+        const imageModal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+
+        function openModal(imgSrc, title) {
+            modalImg.src = imgSrc;
+            modalTitle.textContent = title;
+            imageModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            imageModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar modal al hacer clic fuera de la imagen
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
