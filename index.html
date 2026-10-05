@@ -51,7 +51,7 @@
     .nav-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0.75rem 1.5rem; /* Reducido un poco para acomodar el logo */
+      padding: 0.75rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -64,19 +64,43 @@
       text-decoration: none;
     }
 
-    /* ESTILO PARA TU LOGO REAL */
     .brand-logo-img {
-      height: 40px; /* Tamaño controlado para que no se vea gigante */
-      width: auto; /* Mantiene la proporción */
+      height: 42px;
+      width: auto;
       display: block;
-      /* Si la imagen tuviera un pequeño borde blanco, esto ayuda a integrarla */
       filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-instagram-header {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      color: white;
+      padding: 0.6rem 1.1rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
+    }
+
+    .btn-instagram-header:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(225, 48, 108, 0.5);
     }
 
     .btn-contact-header {
       background: linear-gradient(135deg, #25D366, #128C7E);
       color: white;
-      padding: 0.6rem 1.2rem;
+      padding: 0.6rem 1.1rem;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
@@ -109,7 +133,7 @@
       transform: translateX(-50%);
       width: 300px;
       height: 300px;
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
       z-index: -1;
       pointer-events: none;
     }
@@ -118,9 +142,9 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(6, 182, 212, 0.1);
-      border: 1px solid rgba(6, 182, 212, 0.3);
-      color: var(--accent-cyan);
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      color: var(--accent-orange);
       padding: 0.4rem 1rem;
       border-radius: 50px;
       font-size: 0.85rem;
@@ -144,24 +168,31 @@
       margin-bottom: 2rem;
     }
 
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
     .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 0.75rem;
-      background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
+      background: linear-gradient(135deg, var(--accent-orange), #ea580c);
       color: white;
       padding: 0.9rem 2rem;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 700;
       font-size: 1rem;
-      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
+      box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
       transition: all 0.3s ease;
     }
 
     .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.6);
+      box-shadow: 0 8px 25px rgba(249, 115, 22, 0.6);
     }
 
     .services-grid-section {
@@ -202,13 +233,13 @@
 
     .card:hover {
       transform: translateY(-6px);
-      border-color: rgba(6, 182, 212, 0.4);
+      border-color: rgba(249, 115, 22, 0.4);
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
     }
 
     .card-img-container {
       width: 100%;
-      height: 220px;
+      height: 240px;
       overflow: hidden;
       position: relative;
       background-color: #111827;
@@ -236,7 +267,7 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: var(--accent-cyan);
+      color: var(--accent-orange);
       font-weight: 700;
       margin-bottom: 0.4rem;
     }
@@ -272,9 +303,9 @@
     }
 
     .btn-card:hover {
-      background: var(--accent-cyan);
-      color: #000;
-      border-color: var(--accent-cyan);
+      background: var(--accent-orange);
+      color: #fff;
+      border-color: var(--accent-orange);
     }
 
     .floating-wa {
@@ -303,10 +334,27 @@
 
     footer {
       text-align: center;
-      padding: 2rem 1.5rem;
+      padding: 2.5rem 1.5rem;
       border-top: 1px solid var(--glass-border);
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-socials a {
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-socials a:hover {
+      color: var(--accent-orange);
     }
 
     @media (max-width: 600px) {
@@ -317,43 +365,55 @@
         grid-template-columns: 1fr;
       }
       .brand-logo-img {
-        height: 35px; /* Ligeramente más pequeño en móviles */
+        height: 35px;
+      }
+      .btn-instagram-header span {
+        display: none;
+      }
+      .btn-contact-header span {
+        display: none;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header / Navigation -->
+  <!-- Header / Nav -->
   <header>
     <div class="nav-container">
       <a href="#" class="logo">
-        <!-- REEMPLAZO DEL LOGO GENÉRICO POR TU IMAGEN -->
         <img src="project3d_logo.png" alt="Project3D_ve" class="brand-logo-img">
       </a>
-      <a href="https://wa.me/584128029234?text=Hola%20Project3D,%20me%20interesa%20cotizar%20un%20servicio%20de%20impresi%C3%B3n%203D" class="btn-contact-header" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-      </a>
+      <div class="nav-buttons">
+        <a href="https://www.instagram.com/project3d_ve/" class="btn-instagram-header" target="_blank">
+          <i class="fa-brands fa-instagram"></i> <span>Instagram</span>
+        </a>
+        <a href="https://wa.me/584128029234?text=Hola%20Project3D,%20me%20interesa%20cotizar%20un%20servicio%20de%20impresi%C3%B3n%203D" class="btn-contact-header" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> <span>WhatsApp</span>
+        </a>
+      </div>
     </div>
   </header>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="badge">
-      <i class="fa-solid fa-cube"></i> Project3D | Impresión de Alta Calidad
+      <i class="fa-solid fa-cube"></i> Project3D | Impresión 3D de Alta Precisión
     </div>
-    <h1>Transformamos tus ideas y necesidades en piezas reales</h1>
-    <p>Soportes funcionales, accesorios personalizados, repuestos y soluciones creativas impresas en 3D con máxima precisión.</p>
-    <a href="https://wa.me/584128029234?text=Hola%20Project3D,%20quiero%20cotizar%20una%20impresi%C3%B3n%20personalizada" class="btn-primary" target="_blank">
-      <i class="fa-brands fa-whatsapp"></i> Solicitar Cotización
-    </a>
+    <h1>Transformamos tus proyectos e ideas en objetos reales</h1>
+    <p>Diseño e impresión 3D personalizada: llaveros, accesorios para el hogar, herramientas funcionales y soluciones para tu negocio.</p>
+    <div class="hero-buttons">
+      <a href="https://wa.me/584128029234?text=Hola%20Project3D,%20quiero%20cotizar%20una%20impresi%C3%B3n%20personalizada" class="btn-primary" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> Cotizar por WhatsApp
+      </a>
+    </div>
   </section>
 
   <!-- Gallery Section -->
   <section class="services-grid-section">
     <div class="section-title">
-      <h2>Catálogo de Piezas & Servicios</h2>
-      <p>Explora algunos de nuestros modelos impresos. ¿Tienes una idea o archivo .STL? ¡Lo imprimimos!</p>
+      <h2>Catálogo de Productos & Proyectos</h2>
+      <p>Descubre nuestros modelos impresos en 3D. ¿Tienes un diseño propio o archivo STL? ¡Te lo imprimimos!</p>
     </div>
 
     <div class="gallery-grid">
@@ -361,13 +421,13 @@
       <!-- Card 1 -->
       <div class="card">
         <div class="card-img-container">
-          <img src="76ee3828b2d9ebaa.webp" alt="Sporte para Casco de Moto" loading="lazy">
+          <img src="abre lata_2.jpg" alt="Protector y Abridor Mariposa de Lata" loading="lazy">
         </div>
         <div class="card-content">
-          <div class="card-tag">Accesorios Moto</div>
-          <div class="card-title">Soporte para Casco de Moto</div>
-          <div class="card-desc">Soporte resistente para pared con gancho inferior para llaves o chaqueta.</div>
-          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Soporte%20para%20Casco%20de%20Moto" class="btn-card" target="_blank">
+          <div class="card-tag">Hogar & Estilo</div>
+          <div class="card-title">Abridor Mariposa para Latas</div>
+          <div class="card-desc">Diseño elegante tipo mariposa con llavero. Permite abrir latas fácilmente sin maltratar tus uñas y proteger la bebida.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Abridor%20Mariposa%20para%20Latas" class="btn-card" target="_blank">
             <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
           </a>
         </div>
@@ -376,13 +436,13 @@
       <!-- Card 2 -->
       <div class="card">
         <div class="card-img-container">
-          <img src="2025-11-26_768949833ba17.webp" alt="Soporte para Medallas Hexagonal" loading="lazy">
+          <img src="abre lata cerveza_2.jpg" alt="Protectores de Latas Variados Colores" loading="lazy">
         </div>
         <div class="card-content">
-          <div class="card-tag">Decoración & Deporte</div>
-          <div class="card-title">Soporte Modular para Medallas</div>
-          <div class="card-desc">Exhibidor modular con diseño hexagonal para organizar y lucir tus reconocimientos.</div>
-          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Soporte%20Modular%20para%20Medallas" class="btn-card" target="_blank">
+          <div class="card-tag">Accesorios / Bar</div>
+          <div class="card-title">Tapas y Abridores de Lata Multicolor</div>
+          <div class="card-desc">Colección de protectores ergonómicos para latas en diversos colores pastel y vivos. Evitan derrames y facilitan la apertura.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesan%20los%20Protectores%20de%20Lata%20Multicolor" class="btn-card" target="_blank">
             <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
           </a>
         </div>
@@ -391,13 +451,13 @@
       <!-- Card 3 -->
       <div class="card">
         <div class="card-img-container">
-          <img src="basurero barista.jpg" alt="Caja de Basura / Knock Box Barista" loading="lazy">
+          <img src="abrelata cerveza_2.PNG" alt="Abridor de Lata para Cerveza" loading="lazy">
         </div>
         <div class="card-content">
-          <div class="card-tag">Café & Barista</div>
-          <div class="card-title">Caja de Basura para Barista (Knock Box)</div>
-          <div class="card-desc">Depósito reforzado para la borra del café expreso con barra central ultra resistente.</div>
-          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20la%20Caja%20de%20Basura%20para%20Barista" class="btn-card" target="_blank">
+          <div class="card-tag">Utilidades</div>
+          <div class="card-title">Tapa & Abridor Temático de Cerveza</div>
+          <div class="card-desc">Abridor clip compacto con relieve de jarra de cerveza. Ideal para latas de bebida y uso al aire libre.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Abridor%20Tem%C3%A1tico%20de%20Cerveza" class="btn-card" target="_blank">
             <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
           </a>
         </div>
@@ -406,13 +466,13 @@
       <!-- Card 4 -->
       <div class="card">
         <div class="card-img-container">
-          <img src="destapador.jpg" alt="Abridor de Botellas Múltiple" loading="lazy">
+          <img src="basurero barista_2.jpg" alt="Knock Box Barista Basurero de Café" loading="lazy">
         </div>
         <div class="card-content">
-          <div class="card-tag">Utilidades & Bar</div>
-          <div class="card-title">Abridor Múltiple de Botellas</div>
-          <div class="card-desc">Herramienta con palanca para destapar varias botellas de forma simultánea.</div>
-          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Abridor%20M%C3%BAltiple%20de%20Botellas" class="btn-card" target="_blank">
+          <div class="card-tag">Café & Barista</div>
+          <div class="card-title">Knock Box / Basurero para Barista</div>
+          <div class="card-desc">Caja de desecho reforzada con barra central de impacto para extraer los posos de café espresso del porta-filtro.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Knock%20Box%20para%20Barista" class="btn-card" target="_blank">
             <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
           </a>
         </div>
@@ -421,13 +481,13 @@
       <!-- Card 5 -->
       <div class="card">
         <div class="card-img-container">
-          <img src="llavero.jpg" alt="Destapador de Cerveza Llavero" loading="lazy">
+          <img src="Captura_2.jpg" alt="Llavero Destapador Jarra de Cerveza" loading="lazy">
         </div>
         <div class="card-content">
           <div class="card-tag">Llaveros</div>
-          <div class="card-title">Llavero Destapador de Cerveza</div>
-          <div class="card-desc">Diseño compacto en forma de chapa de cerveza, práctico para llevar con tus llaves.</div>
-          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Llavero%20Destapador" class="btn-card" target="_blank">
+          <div class="card-title">Llavero Destapador Metálico Integrado</div>
+          <div class="card-desc">Llavero resistente impreso en 3D con inserto de acero para destapar botellas de vidrio de forma rápida y práctica.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Llavero%20Destapador%20con%20Inserto" class="btn-card" target="_blank">
             <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
           </a>
         </div>
@@ -436,13 +496,13 @@
       <!-- Card 6 -->
       <div class="card">
         <div class="card-img-container">
-          <img src="abre lata.jpg" alt="Abridor de Lata Mariposa" loading="lazy">
+          <img src="destapador 6_2.PNG" alt="Destapador Múltiple Profesional" loading="lazy">
         </div>
         <div class="card-content">
-          <div class="card-tag">Hogar & Cocina</div>
-          <div class="card-title">Abridor / Protector de Lata Mariposa</div>
-          <div class="card-desc">Accesorio ergonómico para abrir latas fácilmente sin dañarte las uñas.</div>
-          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Abridor%20de%20Lata" class="btn-card" target="_blank">
+          <div class="card-tag">Herramientas Bar</div>
+          <div class="card-title">Abridor Múltiple de Palanca</div>
+          <div class="card-desc">Sistema mecánico articulado para destapar múltiples botellas simultáneamente. Ideal para eventos y barra profesional.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Abridor%20M%C3%BAltiple%20de%20Palanca" class="btn-card" target="_blank">
             <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
           </a>
         </div>
@@ -451,13 +511,13 @@
       <!-- Card 7 -->
       <div class="card">
         <div class="card-img-container">
-          <img src="abre lata cerveza.jpg" alt="Abridor de Latas de Cerveza" loading="lazy">
+          <img src="destapador_2.jpg" alt="Destapador de Gatillo" loading="lazy">
         </div>
         <div class="card-content">
-          <div class="card-tag">Accesorios</div>
-          <div class="card-title">Abridor Práctico para Latas</div>
-          <div class="card-desc">Ideal para latas de bebida y cerveza. Disponible en variedad de colores.</div>
-          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Abridor%20Pr%C3%A1ctico%20de%20Latas" class="btn-card" target="_blank">
+          <div class="card-tag">Novedades & Regalos</div>
+          <div class="card-title">Destapador Mecánico de Gatillo</div>
+          <div class="card-desc">Diseño ergonómico tipo gatillo de alta presión para destapar botellas fácilmente. ¡Un excelente accesorio para regalar!</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Destapador%20de%20Gatillo" class="btn-card" target="_blank">
             <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
           </a>
         </div>
@@ -466,13 +526,43 @@
       <!-- Card 8 -->
       <div class="card">
         <div class="card-img-container">
-          <img src="destapador 6.PNG" alt="Destapador con gatillo" loading="lazy">
+          <img src="llavero_2.jpg" alt="Llaveros Chapa Cerveza Destapador" loading="lazy">
         </div>
         <div class="card-content">
-          <div class="card-tag">Bar & Regalos</div>
-          <div class="card-title">Destapador de Gatillo Creativo</div>
-          <div class="card-desc">Mecanismo con resorte para destapar botellas de forma divertida y rápida.</div>
-          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Destapador%20de%20Gatillo" class="btn-card" target="_blank">
+          <div class="card-tag">Llaveros</div>
+          <div class="card-title">Llaveros Estilo Chapa de Cerveza</div>
+          <div class="card-desc">Variedad de llaveros en forma de chapa de botella con base metálica posterior para abrir bebidas en cualquier lugar.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesan%20los%20Llaveros%20Estilo%20Chapa" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="llaveros nombre.jpg" alt="Llaveros Personalizados con Nombre" loading="lazy">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Personalizados</div>
+          <div class="card-title">Llaveros con Nombres Personalizados</div>
+          <div class="card-desc">Llaveros multicapa en tipografía cursiva. Personalízalo con tu nombre o marca en la combinación de colores que prefieras.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20quiero%20cotizar%20Llaveros%20Personalizados%20con%20Nombre" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 10 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="Menu qr.jpg" alt="Exhibidor Stand para Código QR" loading="lazy">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Comercial & Negocios</div>
+          <div class="card-title">Stand Base para Código QR de Negocio</div>
+          <div class="card-desc">Soporte inclinado de mesa impreso en 3D para menús, métodos de pago o redes sociales mediante código QR.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Stand%20Base%20para%20C%C3%B3digo%20QR" class="btn-card" target="_blank">
             <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
           </a>
         </div>
@@ -482,12 +572,18 @@
   </section>
 
   <!-- Botón Flotante de WhatsApp -->
-  <a href="https://wa.me/584128029234?text=Hola%20Project3D,%20me%20gustar%C3%ADa%20consultar%20por%20un%20servicio%20de%20impresi%C3%B3n" class="floating-wa" target="_blank" title="Contactar por WhatsApp Business">
+  <a href="https://wa.me/584128029234?text=Hola%20Project3D,%20me%20gustar%C3%ADa%20consultar%20por%20un%20servicio%20de%20impresi%C3%B3n" class="floating-wa" target="_blank" title="Contactar por WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2026 Project3D — Servicios de Impresión 3D. Manuel F. Guzmán.</p>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/project3d_ve/" target="_blank" title="Síguenos en Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://wa.me/584128029234" target="_blank" title="Escríbenos por WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <p>&copy; 2026 Project3D — Impresión y Diseño 3D. Manuel F. Guzmán.</p>
+    <p style="font-size: 0.8rem; margin-top: 0.4rem; color: #64748b;">Síguenos en Instagram: <a href="https://www.instagram.com/project3d_ve/" target="_blank" style="color: var(--accent-orange); text-decoration: none;">@project3d_ve</a></p>
   </footer>
 
 </body>
