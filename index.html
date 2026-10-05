@@ -1,1 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project3D - Servicios de Impresión 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --accent-cyan: #06b6d4;
+      --accent-orange: #f97316;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .brand-title {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(15, 23, 42, 0.85);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .brand-logo-img {
+      height: 45px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-social {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-social:hover {
+      background: #E1306C;
+      color: white;
+      border-color: #E1306C;
+      transform: translateY(-2px);
+    }
+
+    .btn-contact-header {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-contact-header:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.5);
+    }
+
+    .hero {
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: var(--accent-cyan);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.6);
+    }
+
+    .services-grid-section {
+      max-width: 1200px;
+      margin: 2rem auto 4rem;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      color: var(--text-main);
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(6, 182, 212, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-img-container {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+      background-color: #111827;
+    }
+
+    .card-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-img-container img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .btn-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-card:hover {
+      background: var(--accent-cyan);
+      color: #000;
+      border-color: var(--accent-cyan);
+    }
+
+    .floating-wa {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .floating-wa:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .brand-logo-img {
+        height: 35px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <img src="Recurso 14.png" alt="Project3D_ve Logo" class="brand-logo-img" data-fallback="Recurso 14_2.png">
+      </a>
+      <div class="nav-actions">
+        <a href="https://www.instagram.com/project3d_ve/" target="_blank" class="btn-social" title="Síguenos en Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/584128029234?text=Hola%20Project3D,%20me%20interesa%20cotizar%20un%20servicio%20de%20impresi%C3%B3n%203D" class="btn-contact-header" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="badge">
+      <i class="fa-solid fa-cube"></i> Project3D | Impresión 3D de Alta Calidad
+    </div>
+    <h1>Transformamos tus ideas y necesidades en piezas reales</h1>
+    <p>Soportes funcionales, accesorios personalizados, productos innovadores y soluciones a medida impresas en 3D.</p>
+    <a href="https://wa.me/584128029234?text=Hola%20Project3D,%20quiero%20cotizar%20una%20impresi%C3%B3n%20personalizada" class="btn-primary" target="_blank">
+      <i class="fa-brands fa-whatsapp"></i> Solicitar Cotización
+    </a>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="services-grid-section">
+    <div class="section-title">
+      <h2>Catálogo de Productos & Servicios</h2>
+      <p>Explora nuestros modelos disponibles. ¿Tienes un diseño propio o archivo .STL? ¡También lo imprimimos!</p>
+    </div>
+
+    <div class="gallery-grid">
+
+      <!-- Item 1 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="nfv mascota.jpg" alt="Placa NFC para Mascota">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Mascotas & Tecnología</div>
+          <div class="card-title">Placa NFC para Mascota</div>
+          <div class="card-desc">Identificador resistente con chip NFC y código para escanear los datos de contacto de tu mascota al instante.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20la%20Placa%20NFC%20para%20Mascota" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="personalizadp lapiz.jpg" alt="Sujetador Personalizado para Lápiz">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Escolar & Regalos</div>
+          <div class="card-title">Nombres Personalizados para Lápiz</div>
+          <div class="card-desc">Accesorios personalizados en varios colores para identificar lápices y creyones con tu nombre.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesan%20los%20Nombres%20Personalizados%20para%20L%C3%A1piz" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="Menu qr.jpg" alt="Soporte para Menú QR" data-fallback="Menu qr_2.jpg">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Comercios & Restaurantes</div>
+          <div class="card-title">Display / Soporte para Menú QR</div>
+          <div class="card-desc">Stand de mesa elegante para códigos QR de menús, redes sociales o métodos de pago.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Soporte%20para%20Men%C3%BA%20QR" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="soporte copas.jpg" alt="Exhibidor Árbol para Copas de Vino">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Hogar & Decoración</div>
+          <div class="card-title">Soporte Árbol para Copas de Vino</div>
+          <div class="card-desc">Elegante exhibidor con forma orgánica para organizar y secar copas de vino con estilo moderno.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Soporte%20%C3%81rbol%20para%20Copas" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="Sopote telefono.jpg" alt="Soporte Plegable para Teléfono">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Oficina & Accesorios</div>
+          <div class="card-title">Soporte Plegable para Teléfono</div>
+          <div class="card-desc">Base compacta y articulada para smartphones. Funciona como llavero para llevar a todas partes.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Soporte%20Plegable%20para%20Tel%C3%A9fono" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 6 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="zulia cerveza.PNG" alt="Llavero Caja Cerveza Zulia">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Llaveros Coleccionables</div>
+          <div class="card-title">Llavero Mini Malla Cerveza Zulia</div>
+          <div class="card-desc">Miniatura detallada impresa en 3D en forma de huacal / caja de cerveza tradicional.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Llavero%20Caja%20Cerveza%20Zulia" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 7 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="basurero barista_2.jpg" alt="Knock Box Barista" data-fallback="basurero barista.jpg">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Barista & Café</div>
+          <div class="card-title">Knock Box / Basurero para Barista</div>
+          <div class="card-desc">Depósito reforzado para desechar la borra del café expreso con barra central de impacto.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Basurero%20para%20Barista" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 8 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="destapador_2.jpg" alt="Destapador de Palanca" data-fallback="destapador.jpg">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Bar & Utilidades</div>
+          <div class="card-title">Destapador Ergonómico de Palanca</div>
+          <div class="card-desc">Diseño de alta resistencia con sistema mecánico para destapar botellas sin esfuerzo.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Destapador%20Ergon%C3%B3mico" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 9 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="llaveros nombre.jpg" alt="Llaveros 3D Personalizados">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Personalizados</div>
+          <div class="card-title">Llaveros 3D con Nombres</div>
+          <div class="card-desc">Diseños en relieve impresos en múltiples colores con el nombre o texto que prefieras.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesan%20los%20Llaveros%203D%20Personalizados" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 10 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="llavero_2.jpg" alt="Llavero Destapador Tipo Tapa" data-fallback="llavero.jpg">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Llaveros & Bar</div>
+          <div class="card-title">Llavero Destapador Tipo Chapa</div>
+          <div class="card-desc">Llavero compacto con diseño de tapa de cerveza e inserto metálico destapador.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Llavero%20Destapador" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 11 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="abre lata_3.jpg" alt="Abrelatas Protector Mariposa" data-fallback="abre lata_2.jpg">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Hogar & Cocina</div>
+          <div class="card-title">Abrelatas Protector Mariposa</div>
+          <div class="card-desc">Accesorio ergonómico para destapar latas de refresco o cerveza fácilmente y protegerlas de insectos.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Abrelatas%20Mariposa" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+      <!-- Item 12 -->
+      <div class="card">
+        <div class="card-img-container">
+          <img src="pistola.jpg" alt="Lanzador BB Launcher SF50">
+        </div>
+        <div class="card-content">
+          <div class="card-tag">Modelos 3D & DIVERSIÓN</div>
+          <div class="card-title">Lanzador BB Launcher - SF50</div>
+          <div class="card-desc">Juguete / modelo impreso en 3D con mecanismo funcional de resorte.</div>
+          <a href="https://wa.me/584128029234?text=Hola,%20me%20interesa%20el%20Lanzador%20BB%20Launcher" class="btn-card" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar este producto
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Botón Flotante de WhatsApp -->
+  <a href="https://wa.me/584128029234?text=Hola%20Project3D,%20me%20gustar%C3%ADa%20consultar%20por%20un%20servicio%20de%20impresi%C3%B3n" class="floating-wa" target="_blank" title="Contactar por WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <footer>
+    <p>&copy; 2026 Project3D — Servicios de Impresión 3D. Síguenos en <a href="https://www.instagram.com/project3d_ve/" target="_blank">@project3d_ve</a></p>
+  </footer>
+
+  <!-- SCRIPT AUTOMÁTICO DE REPARACIÓN DE RUTAS E IMÁGENES -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const images = document.querySelectorAll("img");
+      
+      images.forEach(img => {
+        // Asignar manejador de error
+        img.addEventListener("error", function handleImgError() {
+          const originalSrc = this.getAttribute("src");
+          const fallback = this.getAttribute("data-fallback");
+
+          // Si tiene una imagen alternativa secundaria configurada
+          if (fallback && this.src !== fallback) {
+            this.src = fallback;
+            return;
+          }
+
+          // Si falló, intentar variaciones comunes de nombre (mayúsculas/minúsculas, guiones, espacios)
+          if (!this.dataset.triedVariations) {
+            this.dataset.triedVariations = "true";
+            
+            // Probar decodificar o codificar espacios URL
+            if (originalSrc.includes("%20")) {
+              this.src = decodeURIComponent(originalSrc);
+            } else if (originalSrc.includes(" ")) {
+              this.src = encodeURIComponent(originalSrc).replace(/%2F/g, "/");
+            } else {
+              // Cambiar extensión entre minúscula y mayúscula
+              if (originalSrc.endsWith(".jpg")) this.src = originalSrc.replace(".jpg", ".JPG");
+              else if (originalSrc.endsWith(".png")) this.src = originalSrc.replace(".png", ".PNG");
+              else if (originalSrc.endsWith(".PNG")) this.src = originalSrc.replace(".PNG", ".png");
+            }
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
